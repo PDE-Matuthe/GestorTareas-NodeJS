@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include ('partials/head.ejs') %>
+</head>
+
+<body>
+  <%- include ('partials/nav.ejs') %>
+    <main>
+      <h1 class="text-center mb-4">Tareas</h1>
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4 p-3 bg-light rounded shadow-sm">
+          <!-- Formulario de filtro -->
+          <form action="/" method="GET" class="d-flex align-items-center" style="gap: 10px;">
+            <label for="categoria" class="form-label align-items-center fw-bold text" id="cat-label">Filtrar por
+              categoría:</label>
+            <select id="categoria" name="categoria" class="form-select" style="max-width: 250px;">
+              <option value="">Todas</option>
+              <option value="Trabajo">Trabajo</option>
+              <option value="Personal">Personal</option>
+              <option value="Hogar">Hogar</option>
+              <option value="Estudios">Estudios</option>
+              <option value="Finanzas">Finanzas</option>
+              <option value="Salud">Salud</option>
+              <option value="Entretenimiento">Entretenimiento</option>
+              <option value="Otro">Otro</option>
+            </select>
+            <button type="submit" class="btn btn-primary d-flex align-items-center">
+              Filtrar
+            </button>
+          </form>
+
+          <!-- Botón de nueva tarea -->
+          <a href="/crear" class="btn btn-success d-flex align-items-center">
+            Nueva Tarea
+          </a>
+        </div>
+
+
+
+        <% if (tareas.length> 0) { %>
+          <div class="row d-flex align-items-stretch">
+            <% tareas.forEach(tarea=> { %>
+              <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                <div class="card <%= tarea.completada ? 'alert-success' : 'alert-danger' %> h-100">
+                  <div class="card-body">
+                    <h5 class="card-title d-flex justify-content-between ">
+                      <%= tarea.titulo %>
+                        <div class="d-flex">
+                          <a href="/editar/<%= tarea.id %>" class="text-decoration-none text-dark me-2">
+                            <i class="bi bi-pencil"></i>
+                          </a>
+                          <a href="/delete/<%= tarea.id %>" class="text-decoration-none text-dark"
+                            onclick="return confirmDeletion(event)">
+                            <i class="bi bi-trash"></i>
+                          </a>
+                        </div>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                      <%= tarea.categoria %>
+                    </h6>
+                    <p class="card-text">
+                      <%= tarea.descripcion %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <% }) %>
+          </div>
+          <% } else { %>
+            <div class="alert alert-warning" role="alert">
+              No hay tareas para mostrar
+            </div>
+            <% } %>
+      </div>
+    </main>
+
+    <%- include ('partials/footer.ejs') %>
+      <script>
+        function confirmDeletion(event) {
+          const confirmation = confirm("¿Estás seguro de que quieres eliminar esta tarea?");
+          if (!confirmation) {
+            event.preventDefault();
+          }
+        }
+      </script>
+</body>
+
+
+</html>
