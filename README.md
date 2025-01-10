@@ -17,11 +17,6 @@ Este es un proyecto de gestión de usuarios y tareas desarrollado con Node.js, E
 
 1. **Clonar el repositorio**:
 
-   ```bash
-   git clone <URL_DEL_REPOSITORIO>
-   cd <CARPETA_DEL_PROYECTO>
-   ```
-
 2. **Instalar dependencias**:
 
    ```bash
