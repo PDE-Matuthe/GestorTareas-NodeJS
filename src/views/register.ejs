@@ -36,16 +36,27 @@
                     </div>
                     <div class="mb-3">
                       <label for="password" class="form-label">Contraseña</label>
-                      <input type="password" class="form-control" id="password" name="password" required minlength="8"
-                        pattern="(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}">
-                      <div class="invalid-feedback">La contraseña debe tener al menos 8 caracteres, incluir una letra y
-                        un
-                        número.</div>
+                      <div class="input-group">
+                        <input type="password" class="form-control" id="password" name="password" required minlength="8"
+                          pattern="(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}">
+                        <button type="button" class="btn btn-outline-secondary input-group-text" id="togglePassword">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                        <div class="invalid-feedback">La contraseña debe tener al menos 8 caracteres, incluir una letra
+                          y un número.</div>
+                      </div>
                     </div>
                     <div class="mb-3">
                       <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
-                      <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-                      <div class="invalid-feedback">Las contraseñas no coinciden.</div>
+                      <div class="input-group">
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                          required>
+                        <button type="button" class="btn btn-outline-secondary input-group-text"
+                          id="toggleConfirmPassword">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                        <div class="invalid-feedback">Las contraseñas no coinciden.</div>
+                      </div>
                     </div>
                     <button type="submit" class="btn btn-success w-100">Registrarse</button>
                   </form>
@@ -57,8 +68,6 @@
     </main>
     <%- include('partials/footer.ejs') %>
 </body>
-
-</html>
 
 <script>
   // Validación con Bootstrap
@@ -85,7 +94,19 @@
       }, false);
     });
   })();
+
+  // Mostrar/Ocultar contraseñas
+  document.getElementById('togglePassword').addEventListener('click', () => {
+    const passwordField = document.getElementById('password');
+    const type = passwordField.type === 'password' ? 'text' : 'password';
+    passwordField.type = type;
+  });
+
+  document.getElementById('toggleConfirmPassword').addEventListener('click', () => {
+    const confirmPasswordField = document.getElementById('confirmPassword');
+    const type = confirmPasswordField.type === 'password' ? 'text' : 'password';
+    confirmPasswordField.type = type;
+  });
 </script>
-</body>
 
 </html>
