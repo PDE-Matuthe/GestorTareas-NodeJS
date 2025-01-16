@@ -18,7 +18,7 @@ export const getTareasByUsuarioId = async (usuarioId) => {
 
 export const getTareasBycategoria = async (usuarioId, categoria) => {
   const [rows] = await pool.query(
-    'SELECT titulo, categoria, descripcion, completada FROM tareas WHERE usuario_id = UUID_TO_BIN(?) AND categoria = ?',
+    'SELECT BIN_TO_UUID(id) as id, titulo, categoria, descripcion, completada FROM tareas WHERE usuario_id = UUID_TO_BIN(?) AND categoria = ?',
     [usuarioId, categoria]
   )
   return rows
