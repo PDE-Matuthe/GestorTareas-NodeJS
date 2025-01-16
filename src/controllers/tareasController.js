@@ -13,7 +13,7 @@ export const renderTareasPage = async (req, res) => {
     // Si no hay filtro, obtener todas las tareas del usuario
     tareas = await getTareasByUsuarioId(usuarioId)
   }
-
+  console.log(tareas)
   res.render('tareas', { title: 'Tareas', tareas })
 }
 
